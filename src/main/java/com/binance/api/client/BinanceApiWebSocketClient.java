@@ -1,10 +1,6 @@
 package com.binance.api.client;
 
-import com.binance.api.client.domain.event.AggTradeEvent;
-import com.binance.api.client.domain.event.AllMarketTickersEvent;
-import com.binance.api.client.domain.event.CandlestickEvent;
-import com.binance.api.client.domain.event.DepthEvent;
-import com.binance.api.client.domain.event.UserDataUpdateEvent;
+import com.binance.api.client.domain.event.*;
 import com.binance.api.client.domain.market.CandlestickInterval;
 
 import java.io.Closeable;
@@ -14,7 +10,10 @@ import java.util.List;
  * Binance API data streaming façade, supporting streaming of events through web sockets.
  */
 public interface BinanceApiWebSocketClient extends Closeable {
-
+    /**
+     * Supported depth levels: 5, 10, 20
+     */
+    Closeable onPartialDepthEvent(String symbol, int level, BinanceApiCallback<PartialDepthEvent> callback);
     /**
      * Open a new web socket to receive {@link DepthEvent depthEvents} on a callback.
      *
