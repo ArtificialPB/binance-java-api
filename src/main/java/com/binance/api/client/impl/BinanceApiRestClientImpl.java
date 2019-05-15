@@ -3,21 +3,12 @@ package com.binance.api.client.impl;
 import com.binance.api.client.BinanceApiRestClient;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.account.*;
-import com.binance.api.client.domain.account.request.AllOrdersRequest;
-import com.binance.api.client.domain.account.request.CancelOrderRequest;
-import com.binance.api.client.domain.account.request.CancelOrderResponse;
-import com.binance.api.client.domain.account.request.OrderRequest;
-import com.binance.api.client.domain.account.request.OrderStatusRequest;
+import com.binance.api.client.domain.account.request.*;
 import com.binance.api.client.domain.general.Asset;
 import com.binance.api.client.domain.general.ExchangeInfo;
-import com.binance.api.client.domain.market.AggTrade;
-import com.binance.api.client.domain.market.BookTicker;
-import com.binance.api.client.domain.market.Candlestick;
-import com.binance.api.client.domain.market.CandlestickInterval;
-import com.binance.api.client.domain.market.OrderBook;
-import com.binance.api.client.domain.market.TickerPrice;
-import com.binance.api.client.domain.market.TickerStatistics;
+import com.binance.api.client.domain.market.*;
 
+import java.net.ProxySelector;
 import java.util.List;
 
 import static com.binance.api.client.impl.BinanceApiServiceGenerator.createService;
@@ -31,7 +22,11 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
   private final BinanceApiService binanceApiService;
 
   public BinanceApiRestClientImpl(String apiKey, String secret) {
-    binanceApiService = createService(BinanceApiService.class, apiKey, secret);
+    this(apiKey, secret, null);
+  }
+
+  public BinanceApiRestClientImpl(String apiKey, String secret, ProxySelector proxySelector) {
+    binanceApiService = createService(BinanceApiService.class, apiKey, secret, proxySelector);
   }
 
   // General endpoints

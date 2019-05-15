@@ -11,6 +11,7 @@ import com.binance.api.client.domain.general.ExchangeInfo;
 import com.binance.api.client.domain.general.ServerTime;
 import com.binance.api.client.domain.market.*;
 
+import java.net.ProxySelector;
 import java.util.List;
 
 import static com.binance.api.client.impl.BinanceApiServiceGenerator.createService;
@@ -23,7 +24,11 @@ public class BinanceApiAsyncRestClientImpl implements BinanceApiAsyncRestClient 
   private final BinanceApiService binanceApiService;
 
   public BinanceApiAsyncRestClientImpl(String apiKey, String secret) {
-    binanceApiService = createService(BinanceApiService.class, apiKey, secret);
+    this(apiKey, secret, null);
+  }
+
+  public BinanceApiAsyncRestClientImpl(String apiKey, String secret, ProxySelector proxySelector) {
+    binanceApiService = createService(BinanceApiService.class, apiKey, secret, proxySelector);
   }
 
   // General endpoints

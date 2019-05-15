@@ -4,6 +4,8 @@ import com.binance.api.client.impl.BinanceApiAsyncRestClientImpl;
 import com.binance.api.client.impl.BinanceApiRestClientImpl;
 import com.binance.api.client.impl.BinanceApiWebSocketClientImpl;
 
+import java.net.ProxySelector;
+
 import static com.binance.api.client.impl.BinanceApiServiceGenerator.getSharedClient;
 
 /**
@@ -57,13 +59,28 @@ public class BinanceApiClientFactory {
    * Creates a new synchronous/blocking REST client.
    */
   public BinanceApiRestClient newRestClient() {
-    return new BinanceApiRestClientImpl(apiKey, secret);
+    return newRestClient(null);
+  }
+
+  /**
+   * Creates a new synchronous/blocking REST client.
+   */
+  public BinanceApiRestClient newRestClient(ProxySelector proxySelector) {
+    return new BinanceApiRestClientImpl(apiKey, secret, proxySelector);
   }
 
   /**
    * Creates a new asynchronous/non-blocking REST client.
    */
-  public BinanceApiAsyncRestClient newAsyncRestClient() {return new BinanceApiAsyncRestClientImpl(apiKey, secret);
+  public BinanceApiAsyncRestClient newAsyncRestClient() {
+    return newAsyncRestClient(null);
+  }
+
+  /**
+   * Creates a new asynchronous/non-blocking REST client.
+   */
+  public BinanceApiAsyncRestClient newAsyncRestClient(ProxySelector proxySelector) {
+    return new BinanceApiAsyncRestClientImpl(apiKey, secret, proxySelector);
   }
 
   /**
