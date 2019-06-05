@@ -77,6 +77,14 @@ public class BinanceApiServiceGenerator {
             if (response.isSuccessful()) {
                 return response.body();
             } else {
+                System.out.println("Response failed with code " + response.code());
+                final ResponseBody err = response.errorBody();
+                if (err != null) {
+                    System.out.println(err.string());
+                } else {
+                    System.out.println("Error body is null!");
+                }
+                System.out.println(response.headers());
                 BinanceApiError apiError = getBinanceApiError(response);
                 throw new BinanceApiException(apiError);
             }
