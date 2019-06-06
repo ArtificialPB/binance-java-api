@@ -58,7 +58,7 @@ public class BinanceApiServiceGenerator {
         if (!StringUtils.isEmpty(apiKey) && !StringUtils.isEmpty(secret)) {
             // `adaptedClient` will use its own interceptor, but share thread pool etc with the 'parent' client
             AuthenticationInterceptor interceptor = new AuthenticationInterceptor(apiKey, secret);
-            clientBuilder.addInterceptor(interceptor).build();
+            clientBuilder.addInterceptor(interceptor);
         }
         if (proxySelector != null) {
             clientBuilder.proxySelector(proxySelector);
@@ -84,7 +84,10 @@ public class BinanceApiServiceGenerator {
                 } else {
                     System.out.println("Error body is null!");
                 }
+                System.out.println("HEADERS");
                 System.out.println(response.headers());
+                System.out.println("MESSAGE");
+                System.out.println(response.message());
                 BinanceApiError apiError = getBinanceApiError(response);
                 throw new BinanceApiException(apiError);
             }
