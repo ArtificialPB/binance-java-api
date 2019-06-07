@@ -6,6 +6,7 @@ import com.binance.api.client.exception.BinanceApiException;
 import com.binance.api.client.security.AuthenticationInterceptor;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.ResponseBody;
 import org.apache.commons.lang3.StringUtils;
 import retrofit2.Call;
@@ -63,6 +64,14 @@ public class BinanceApiServiceGenerator {
         if (proxySelector != null) {
             clientBuilder.proxySelector(proxySelector);
         }
+        clientBuilder.addInterceptor(chain -> {
+            final Request orig = chain.request();
+            final Request updated = orig.newBuilder()
+                    .addHeader("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:67.0) Gecko/20100101 Firefox/67.0")
+                    .addHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
+                    .build();
+            return chain.proceed(updated);
+        });
         retrofitBuilder.client(clientBuilder.build());
         Retrofit retrofit = retrofitBuilder.build();
         return retrofit.create(serviceClass);
