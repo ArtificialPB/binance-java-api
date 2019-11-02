@@ -1,5 +1,6 @@
 package com.binance.api.client.constant;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
@@ -50,4 +51,5 @@ public class BinanceApiConstants {
    *  - Example ToStringStyle.JSON_STYLE
    */
   public static ToStringStyle TO_STRING_BUILDER_STYLE = ToStringStyle.SHORT_PREFIX_STYLE;
+  public static final ObjectMapper JACKSON_MAPPER = new ObjectMapper();
 }

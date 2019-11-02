@@ -1,9 +1,9 @@
 package com.binance.api.client.impl;
 
 import com.binance.api.client.BinanceApiCallback;
+import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.exception.BinanceApiException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import okhttp3.Response;
 import okhttp3.WebSocket;
@@ -18,20 +18,18 @@ public class BinanceApiWebSocketListener<T> extends WebSocketListener {
 
   private BinanceApiCallback<T> callback;
 
-  private static final ObjectMapper mapper = new ObjectMapper();
-
   private final ObjectReader objectReader;
 
   private boolean closing = false;
 
   public BinanceApiWebSocketListener(BinanceApiCallback<T> callback, Class<T> eventClass) {
     this.callback = callback;
-    this.objectReader = mapper.readerFor(eventClass);
+    this.objectReader = BinanceApiConstants.JACKSON_MAPPER.readerFor(eventClass);
   }
 
   public BinanceApiWebSocketListener(BinanceApiCallback<T> callback, TypeReference<T> eventTypeReference) {
     this.callback = callback;
-    this.objectReader = mapper.readerFor(eventTypeReference);
+    this.objectReader = BinanceApiConstants.JACKSON_MAPPER.readerFor(eventTypeReference);
   }
 
   @Override
