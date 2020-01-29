@@ -29,6 +29,10 @@ public class BinanceApiRestClientImpl implements BinanceApiRestClient {
     binanceApiService = createService(BinanceApiService.class, apiKey, secret, proxySelector);
   }
 
+  public BinanceApiRestClientImpl(final BinanceApiService service){
+    this.binanceApiService = service;
+  }
+
   // General endpoints
 
   @Override
