@@ -31,6 +31,12 @@ public class SymbolInfo {
 
   private List<SymbolFilter> filters;
 
+  private boolean ocoAllowed;
+
+  private boolean isSpotTradingAllowed;
+
+  private boolean isMarginTradingAllowed;
+
   public String getSymbol() {
     return symbol;
   }
@@ -103,6 +109,18 @@ public class SymbolInfo {
     this.filters = filters;
   }
 
+  public boolean isOcoAllowed() {
+    return ocoAllowed;
+  }
+
+  public boolean isSpotTradingAllowed() {
+    return isSpotTradingAllowed;
+  }
+
+  public boolean isMarginTradingAllowed() {
+    return isMarginTradingAllowed;
+  }
+
   /**
    * @param filterType filter type to filter for.
    * @return symbol filter information for the provided filter type.
@@ -126,6 +144,9 @@ public class SymbolInfo {
         .append("orderTypes", orderTypes)
         .append("icebergAllowed", icebergAllowed)
         .append("filters", filters)
+        .append("ocoAllowed", ocoAllowed)
+        .append("isSpotTradingAllowed", isSpotTradingAllowed)
+        .append("isMarginTradingAllowed", isMarginTradingAllowed)
         .toString();
   }
 }

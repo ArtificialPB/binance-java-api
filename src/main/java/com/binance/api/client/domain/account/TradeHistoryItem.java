@@ -26,6 +26,12 @@ public class TradeHistoryItem {
     private String qty;
 
     /**
+     * Quote quantity.
+     */
+    private String quoteQty;
+
+
+    /**
      * Trade execution time.
      */
     private long time;
@@ -66,6 +72,14 @@ public class TradeHistoryItem {
         this.qty = qty;
     }
 
+    public String getQuoteQty() {
+        return quoteQty;
+    }
+
+    public void setQuoteQty(String quoteQty) {
+        this.quoteQty = quoteQty;
+    }
+
     public long getTime() {
         return time;
     }
@@ -96,6 +110,7 @@ public class TradeHistoryItem {
             .append("id", id)
             .append("price", price)
             .append("qty", qty)
+            .append("quoteQty", quoteQty)
             .append("time", time)
             .append("isBuyerMaker", isBuyerMaker)
             .append("isBestMatch", isBestMatch)
