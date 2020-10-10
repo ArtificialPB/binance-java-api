@@ -68,7 +68,7 @@ public class NewOrder {
     /**
      * Creates a new order with all required parameters.
      */
-    public NewOrder(String symbol, OrderSide side, OrderType type, TimeInForce timeInForce, String quantity, String quoteOrderQty) {
+    public NewOrder(String symbol, OrderSide side, OrderType type, TimeInForce timeInForce, String quantity, String quoteOrderQty, String price) {
         this.symbol = symbol;
         this.side = side;
         this.type = type;
@@ -78,13 +78,6 @@ public class NewOrder {
         this.newOrderRespType = NewOrderResponseType.RESULT;
         this.timestamp = System.currentTimeMillis();
         this.recvWindow = BinanceApiConstants.DEFAULT_RECEIVING_WINDOW;
-    }
-
-    /**
-     * Creates a new order with all required parameters plus price, which is optional for MARKET orders.
-     */
-    public NewOrder(String symbol, OrderSide side, OrderType type, TimeInForce timeInForce, String quantity, String quoteOrderQty, String price) {
-        this(symbol, side, type, timeInForce, quantity, quoteOrderQty);
         this.price = price;
     }
 
@@ -211,7 +204,7 @@ public class NewOrder {
      * @return a new order which is pre-configured with MARKET as the order type and BUY as the order side.
      */
     public static NewOrder marketBuy(String symbol, String quoteOrderQty) {
-        return new NewOrder(symbol, OrderSide.BUY, OrderType.MARKET, null, null, quoteOrderQty);
+        return new NewOrder(symbol, OrderSide.BUY, OrderType.MARKET, null, null, quoteOrderQty, null);
     }
 
     /**
@@ -220,7 +213,7 @@ public class NewOrder {
      * @return a new order which is pre-configured with MARKET as the order type and SELL as the order side.
      */
     public static NewOrder marketSell(String symbol, String quantity) {
-        return new NewOrder(symbol, OrderSide.SELL, OrderType.MARKET, null, quantity, null);
+        return new NewOrder(symbol, OrderSide.SELL, OrderType.MARKET, null, quantity, null, null);
     }
 
     /**
@@ -229,7 +222,7 @@ public class NewOrder {
      * @return a new order which is pre-configured with LIMIT as the order type and BUY as the order side.
      */
     public static NewOrder limitBuy(String symbol, TimeInForce timeInForce, String quantity, String price) {
-        return new NewOrder(symbol, OrderSide.BUY, OrderType.LIMIT, timeInForce, quantity, price);
+        return new NewOrder(symbol, OrderSide.BUY, OrderType.LIMIT, timeInForce, quantity, null,  price);
     }
 
     /**
@@ -238,7 +231,7 @@ public class NewOrder {
      * @return a new order which is pre-configured with LIMIT as the order type and SELL as the order side.
      */
     public static NewOrder limitSell(String symbol, TimeInForce timeInForce, String quantity, String price) {
-        return new NewOrder(symbol, OrderSide.SELL, OrderType.LIMIT, timeInForce, quantity, price);
+        return new NewOrder(symbol, OrderSide.SELL, OrderType.LIMIT, timeInForce, quantity, null,  price);
     }
 
     @Override
