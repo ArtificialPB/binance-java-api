@@ -31,11 +31,6 @@ public class MarketDataEndpointsExampleAsync {
       System.out.println(response);
     });
 
-    // Getting all latest prices (async)
-    client.getAllPrices((List<TickerPrice> response) -> {
-      System.out.println(response);
-    });
-
     // Getting agg trades (async)
     client.getAggTrades("NEOETH", (List<AggTrade> response) -> System.out.println(response));
 

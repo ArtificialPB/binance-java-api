@@ -30,10 +30,6 @@ public class MarketDataEndpointsExample {
     TickerStatistics tickerStatistics = client.get24HrPriceStatistics("NEOETH");
     System.out.println(tickerStatistics);
 
-    // Getting all latest prices
-    List<TickerPrice> allPrices = client.getAllPrices();
-    System.out.println(allPrices);
-
     // Getting agg trades
     List<AggTrade> aggTrades = client.getAggTrades("NEOETH");
     System.out.println(aggTrades);
